@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h3>Issue Demo</h3>
+
+@section Scripts {
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			$("#grid").dxDataGrid({
+				dataSource: new DevExpress.data.ODataStore({
+					url: `/odata/Person`,
+					key: 'PersonId',
+					version: 4
+				}),
+				editing: {
+					allowUpdating: true,
+					allowAdding: true,
+					allowDeleting: true,
+					mode: 'batch' // 'row' | 'batch' | 'cell' | 'form' | 'popup'
+				},
+				columns: [
+					{ dataField: "FirstName" },
+					{ dataField: "LastName" }
+				]
+			});
+		});
+
+	</script>
+
+}
+
+<p>
+    <div id="grid"></div>
+</p>
+
+
