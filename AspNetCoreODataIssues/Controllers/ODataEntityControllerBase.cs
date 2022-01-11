@@ -1,6 +1,8 @@
 ﻿using AspNetCoreODataIssues.Data;
-using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Deltas;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreODataIssues.Controllers;
