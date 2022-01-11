@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // odata model
 var modelBuilder = new ODataConventionModelBuilder();
 modelBuilder.EntitySet<Person>("Person");
+modelBuilder.EntitySet<Animal>("Animal");
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

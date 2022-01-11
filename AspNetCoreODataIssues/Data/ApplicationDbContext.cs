@@ -9,5 +9,6 @@ public class ApplicationDbContext : DbContext
     {
     }
     
+    public DbSet<Animal> Animals { get; set; }
     public DbSet<Person> People { get; set; }
 }

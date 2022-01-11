@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-			$("#grid").dxDataGrid({
+			$("#personGrid").dxDataGrid({
 				dataSource: new DevExpress.data.ODataStore({
 					url: `/odata/Person`,
 					key: 'PersonId',
@@ -26,6 +26,23 @@
 					{ dataField: "LastName" }
 				]
 			});
+			
+			$("#animalGrid").dxDataGrid({
+				dataSource: new DevExpress.data.ODataStore({
+					url: `/odata/Animal`,
+					key: 'AnimalId',
+					version: 4
+				}),
+				editing: {
+					allowUpdating: true,
+					allowAdding: true,
+					allowDeleting: true,
+					mode: 'batch' // 'row' | 'batch' | 'cell' | 'form' | 'popup'
+				},
+				columns: [
+					{ dataField: "Name" }
+				]
+			});
 		});
 
 	</script>
@@ -33,7 +50,12 @@
 }
 
 <p>
-    <div id="grid"></div>
+	<div id="personGrid"></div>
 </p>
+
+<p>
+    <div id="animalGrid"></div>
+</p>
+
 
 
