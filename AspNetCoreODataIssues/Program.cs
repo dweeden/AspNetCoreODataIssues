@@ -1,8 +1,8 @@
 using AspNetCoreODataIssues.Data;
 using AspNetCoreODataIssues.Models;
-using Microsoft.AspNetCore.OData;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OData.ModelBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +14,13 @@ modelBuilder.EntitySet<Animal>("Animal");
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
-builder.Services.AddControllersWithViews().AddOData(option => option.Count().SetMaxTop(null).Filter().OrderBy().AddRouteComponents("odata", modelBuilder.GetEdmModel()));
+builder.Services.AddControllersWithViews();
+builder.Services.AddOData();
 
 var app = builder.Build();
+
+app.Count().MaxTop(null).Filter().OrderBy(); //.Select().SkipToken().Expand()
+app.MapODataRoute("Grits OData", "odata", modelBuilder.GetEdmModel());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
