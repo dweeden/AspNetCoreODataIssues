@@ -27,7 +27,7 @@ public abstract class ODataEntityControllerBase<T> : ODataController where T : c
         return Ok(_entities);
     }
 
-    [EnableQuery]
+    /*[EnableQuery]
     [HttpGet("odata/[controller]({id:int})")]
     public IActionResult Get(int id)
     {
@@ -39,7 +39,7 @@ public abstract class ODataEntityControllerBase<T> : ODataController where T : c
         }
 
         return Ok(result);
-    }
+    }*/
         
     [HttpPost]
     public IActionResult Post([FromBody] T entity)
@@ -57,8 +57,7 @@ public abstract class ODataEntityControllerBase<T> : ODataController where T : c
         return Created(entity);
     }
 
-    [HttpPatch("odata/[controller]({id:int})")]
-    public ActionResult Patch(int id, [FromBody] Delta<T> patch)
+    public virtual ActionResult Patch(int id, [FromBody] Delta<T> patch)
     {
         if (!ModelState.IsValid)
         {
