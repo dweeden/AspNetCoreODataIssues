@@ -31,14 +31,14 @@ public abstract class ODataEntityControllerBase<T> : ODataController where T : c
     [HttpGet("odata/[controller]({id:int})")]
     public IActionResult Get(int id)
     {
-        var result = GetEntityById(id);
+        var entity = GetEntityById(id);
 	        
-        if (result == null)
+        if (entity == null)
         {
             return NotFound();
         }
 
-        return Ok(result);
+        return Ok(entity);
     }*/
         
     [HttpPost]
@@ -64,15 +64,15 @@ public abstract class ODataEntityControllerBase<T> : ODataController where T : c
             return BadRequest(ModelState);
         }
 
-        var result = GetEntityById(id);
+        var entity = GetEntityById(id);
 
-        if (result == null)
+        if (entity == null)
         {
             return NotFound();
         }
 
         // update entity and save
-        patch.Patch(result);
+        patch.Patch(entity);
         _context.SaveChanges();
   	        
         return NoContent();
@@ -81,17 +81,17 @@ public abstract class ODataEntityControllerBase<T> : ODataController where T : c
     [HttpDelete("odata/[controller]({id:int})")]
     public IActionResult Delete(int id)
     {
-        var result = GetEntityById(id);
+        var entity = GetEntityById(id);
 
-        if (result == null)
+        if (entity == null)
         {
             return NotFound();
         }
 
         // delete entity and save
-        _entities.Remove(result);
+        _entities.Remove(entity);
         _context.SaveChanges();
   	        
-        return NoContent();
+        return Updated(entity);
     }
 }
